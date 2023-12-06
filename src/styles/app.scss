@@ -13,7 +13,7 @@ input {
     }
 }
 .App {
-    width: 500px;
+    width: 400px;
     height: 100%;
     margin: 100px auto 0 auto;
 }
@@ -21,21 +21,35 @@ input {
 .table-row {
     width: 100%;
     display: grid;
-    grid-template-columns: 60px 70px 50px 200px 60px;
+    grid-template-columns: 60px 70px 50px 120px 30px;
     column-gap: 15px;
+    &_status,
+    &_product,
+    &_id,
+    &_name,
+    &_additional {
+        display: flex;
+        align-items: center;
+    }
     &_status {
+        height: 20px;
         grid-column-start: 1;
     }
     &_product {
+        height: 20px;
         grid-column-start: 2;
     }
     &_id {
+        height: 20px;
         grid-column-start: 3;
     }
     &_name {
+        position: relative;
+        height: 20px;
         grid-column-start: 4;
     }
     &_additional {
+        height: 20px;
         grid-column-start: 5;
     }
 }

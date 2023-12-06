@@ -24,7 +24,7 @@ const NewProductItem = ({ isVisible, addProduct, toggleNewProductInput }) => {
 
     const handleKeyPress = (event) => {
         const value = event.target.value
-        if (event.key === 'Enter') {
+        if (event.key && event.key === 'Enter') {
             if (event.target === input1Ref.current) {
                 if (!checkLength(value, 1, 3)) {
                     input1Ref.current.focus()
@@ -34,7 +34,7 @@ const NewProductItem = ({ isVisible, addProduct, toggleNewProductInput }) => {
                 input2Ref.current.focus()
                 return
             } else if (event.target === input2Ref.current) {
-                if (!checkLength(value, 1, 50)) {
+                if (!checkLength(value, 3, 50)) {
                     input2Ref.current.focus()
                     return
                 }
@@ -42,6 +42,13 @@ const NewProductItem = ({ isVisible, addProduct, toggleNewProductInput }) => {
             }
             saveNewProduct(productId, productName, productIcon)
         }
+    }
+
+    const blurInput = () => {
+        setProductId('')
+        setProductName('')
+        setProductIcon(productIconDefault)
+        toggleNewProductInput()
     }
 
     const saveNewProduct = (productId, productName, productIcon) => {
@@ -52,11 +59,8 @@ const NewProductItem = ({ isVisible, addProduct, toggleNewProductInput }) => {
             name: productName,
             icon: productIcon,
         }
-        toggleNewProductInput()
         addProduct(newProductData)
-        setProductId('')
-        setProductName('')
-        setProductIcon(productIconDefault)
+        blurInput()
     }
     const buildNewProductRow = () => {
         return (
@@ -71,6 +75,7 @@ const NewProductItem = ({ isVisible, addProduct, toggleNewProductInput }) => {
                     <input
                         type="text"
                         ref={input1Ref}
+                        placeholder="ID"
                         onChange={(e) => setProductId(e.target.value)}
                         maxLength={3}
                         value={productId}
@@ -82,6 +87,7 @@ const NewProductItem = ({ isVisible, addProduct, toggleNewProductInput }) => {
                     <input
                         type="text"
                         ref={input2Ref}
+                        placeholder="Name"
                         onChange={(e) => setProductName(e.target.value)}
                         maxLength={50}
                         value={productName}

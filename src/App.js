@@ -123,11 +123,24 @@ function App() {
     }
 
     const toggleStatus = (productId) => {
-        console.log('toggle', productId)
         const updatedDB = productsData.map((product) => {
             if (product.id === productId) {
-                const oldStatus = product.status
-                return { ...product, status: !oldStatus }
+                return { ...product, status: !product.status }
+            } else return product
+        })
+        setProductsData(updatedDB)
+    }
+
+    const changeProduct = (productId, nameOrStatusOrIconData = null) => {
+        const argumentType = typeof nameOrStatusOrIconData
+        const updatedDB = productsData.map((product) => {
+            if (product.id === productId) {
+                if (nameOrStatusOrIconData === null)
+                    return { ...product, status: !product.status }
+                else if (argumentType === 'number' || argumentType === 'string')
+                    return { ...product, name: nameOrStatusOrIconData }
+                else if (argumentType === 'object')
+                    return { ...product, icon: nameOrStatusOrIconData }
             } else return product
         })
         setProductsData(updatedDB)
@@ -138,10 +151,11 @@ function App() {
             <FiltersMenu toggleNewProductInput={toggleNewProductInput} />
             <ProductsList
                 productsData={productsData}
+                productIconsData={productIconsData}
                 hasNewProductInput={hasNewProductInput}
-                toggleNewProductInput={toggleNewProductInput}
                 addProduct={addProduct}
-                toggleStatus={toggleStatus}
+                changeProduct={changeProduct}
+                toggleNewProductInput={toggleNewProductInput}
             />
         </div>
     )

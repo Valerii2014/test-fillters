@@ -1,0 +1,19 @@
+.icons-list {
+    width: 100%;
+    margin: auto 0;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    row-gap: 10px;
+    background-color: #fff;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+    overflow: hidden;
+    &_item {
+        cursor: pointer;
+        &_disable {
+            opacity: 0.4;
+            cursor: default;
+        }
+    }
+}

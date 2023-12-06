@@ -7,20 +7,20 @@ import { useState } from 'react'
 const ProductsList = ({
     productsData,
     hasNewProductInput,
+    productIconsData,
     addProduct,
     toggleNewProductInput,
-    toggleStatus,
+    changeProduct,
 }) => {
     const [newProduct, setNewProduct] = useState(null)
-
-    const createNewProduct = () => {}
 
     const buildProductsList = (productsData) => {
         return productsData.map((productData) => (
             <ProductItem
                 key={productData.id}
                 productData={productData}
-                toggleStatus={toggleStatus}
+                productIconsData={productIconsData}
+                changeProduct={changeProduct}
             />
         ))
     }
@@ -30,6 +30,7 @@ const ProductsList = ({
             <NewProductItem
                 isVisible={hasNewProductInput}
                 addProduct={addProduct}
+                changeProduct={changeProduct}
                 toggleNewProductInput={toggleNewProductInput}
             />
             {buildProductsList(productsData)}

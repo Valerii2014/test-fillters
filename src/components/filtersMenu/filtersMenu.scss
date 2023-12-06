@@ -1,6 +1,7 @@
 .filtersMenu {
     height: 50px;
     &_additional {
+        height: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;
