@@ -18,7 +18,7 @@ const MenuItem = (props) => {
                         <path
                             d="M4.5 4.65385L0 0.5L9 0.5L4.5 4.65385Z"
                             fill="black"
-                            fill-opacity="0.7"
+                            fillOpacity="0.7"
                         />
                     </svg>
                 </div>

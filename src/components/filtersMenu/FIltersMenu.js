@@ -2,7 +2,7 @@ import './filtersMenu.scss'
 
 import MenuItem from '../menuItem/MenuItem'
 
-const FiltersMenu = () => {
+const FiltersMenu = ({ hasNewProductInput, toggleNewProductInput }) => {
     const filterFunction = () => {}
     return (
         <div className="filtersMenu table-row">
@@ -31,7 +31,7 @@ const FiltersMenu = () => {
                 filterFunction={filterFunction}
             />
             <div className="table-row_additional filtersMenu_additional">
-                <div className="add-product">
+                <div className="add-product" onClick={toggleNewProductInput}>
                     <div className="filtersMenu_button-item"></div>
                     <div className="filtersMenu_button-item"></div>
                 </div>

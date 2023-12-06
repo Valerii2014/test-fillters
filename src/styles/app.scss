@@ -4,8 +4,16 @@
     margin: 0;
 }
 
+input {
+    width: 100%;
+    border: none;
+    &:focus {
+        outline: none;
+        border: none;
+    }
+}
 .App {
-    width: 530px;
+    width: 500px;
     height: 100%;
     margin: 100px auto 0 auto;
 }
@@ -13,7 +21,7 @@
 .table-row {
     width: 100%;
     display: grid;
-    grid-template-columns: 90px 70px 50px 200px 60px;
+    grid-template-columns: 60px 70px 50px 200px 60px;
     column-gap: 15px;
     &_status {
         grid-column-start: 1;
