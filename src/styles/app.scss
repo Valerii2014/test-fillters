@@ -1,0 +1,33 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+.App {
+    width: 530px;
+    height: 100%;
+    margin: 100px auto 0 auto;
+}
+
+.table-row {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 90px 70px 50px 200px 60px;
+    column-gap: 15px;
+    &_status {
+        grid-column-start: 1;
+    }
+    &_product {
+        grid-column-start: 2;
+    }
+    &_id {
+        grid-column-start: 3;
+    }
+    &_name {
+        grid-column-start: 4;
+    }
+    &_additional {
+        grid-column-start: 5;
+    }
+}
