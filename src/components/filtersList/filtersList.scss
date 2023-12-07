@@ -1,0 +1,34 @@
+.filters-list {
+    width: calc(100% - 10px);
+    height: calc(100% - 7px);
+    padding-left: 15px;
+    background-color: #fff;
+    font-size: 12px;
+    list-style-type: none;
+    overflow: auto;
+    li {
+        cursor: pointer;
+        transition: all 0.5s;
+        &:hover {
+            color: rgb(130, 130, 130);
+            &::before {
+                background-color: rgb(130, 130, 130);
+            }
+        }
+    }
+    &-item_active {
+        position: relative;
+        &::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: -10px;
+            transform: translateY(-50%);
+            border-radius: 65%;
+            transition: all 0.5s;
+            height: 5px;
+            width: 5px;
+            background-color: #000;
+        }
+    }
+}

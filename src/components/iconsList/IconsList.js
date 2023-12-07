@@ -5,11 +5,16 @@ const IconList = ({
     changeProduct,
     productIconId,
     productId,
+    usedIcons,
 }) => {
     const createIconList = () => {
         return productsIcons.map((iconData) => {
             const { url, id } = iconData
-            const isDisable = id === productIconId ? true : false
+            const isDisable =
+                id === productIconId ||
+                usedIcons.some((useIcon) => useIcon === id)
+                    ? true
+                    : false
             const onClickCB = isDisable
                 ? null
                 : () => changeProduct(productId, iconData)

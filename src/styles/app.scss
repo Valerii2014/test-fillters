@@ -13,16 +13,16 @@ input {
     }
 }
 .App {
-    width: 400px;
+    width: 380px;
     height: 100%;
     margin: 100px auto 0 auto;
 }
 
 .table-row {
-    width: 100%;
     display: grid;
-    grid-template-columns: 60px 70px 50px 120px 30px;
-    column-gap: 15px;
+    grid-template-columns: 1px 60px 70px 50px 120px 40px;
+    column-gap: 9px;
+    border-radius: 5px;
     &_status,
     &_product,
     &_id,
@@ -31,25 +31,24 @@ input {
         display: flex;
         align-items: center;
     }
-    &_status {
-        height: 20px;
+    &_prev {
         grid-column-start: 1;
     }
-    &_product {
-        height: 20px;
+    &_status {
         grid-column-start: 2;
     }
-    &_id {
-        height: 20px;
+    &_product {
         grid-column-start: 3;
+    }
+    &_id {
+        grid-column-start: 4;
     }
     &_name {
         position: relative;
-        height: 20px;
-        grid-column-start: 4;
+
+        grid-column-start: 5;
     }
     &_additional {
-        height: 20px;
-        grid-column-start: 5;
+        grid-column-start: 6;
     }
 }

@@ -36,5 +36,8 @@
             rotate: 45deg;
             transform: translateX(-40%) translateY(-50%);
         }
+        &_hide {
+            display: none;
+        }
     }
 }

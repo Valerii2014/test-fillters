@@ -3,4 +3,53 @@
     .product-hide {
         display: none;
     }
+    .product-item-wrapper {
+        border-radius: 4px;
+        &:hover {
+            background-color: #cacaca;
+            input {
+                background-color: #cacaca;
+                &:focus {
+                    background-color: #e3e2e2;
+                }
+            }
+            .table-row_additional {
+                background-color: #fff;
+            }
+            .table-row-prev {
+                width: 5px;
+                background-color: #515151;
+                border-radius: 4px 0 0 4px;
+            }
+        }
+        &:focus {
+            background-color: #fff;
+            input {
+                background-color: #fff;
+                &:focus {
+                    background-color: #fff;
+                }
+            }
+            .table-row_additional {
+                background-color: #fff;
+            }
+        }
+        &_choised {
+            background-color: #898989;
+            input {
+                background-color: #898989;
+                &:focus {
+                    background-color: #898989;
+                }
+            }
+            .table-row_additional {
+                background-color: #fff;
+            }
+            .table-row-prev {
+                width: 5px;
+                background-color: #363636;
+                border-radius: 4px 0 0 4px;
+            }
+        }
+    }
 }

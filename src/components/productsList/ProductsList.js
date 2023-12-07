@@ -2,7 +2,6 @@ import './productsList.scss'
 
 import ProductItem from '../productItem/ProductItem'
 import NewProductItem from '../productItem/NewProductItem'
-import { useState } from 'react'
 
 const ProductsList = ({
     productsData,
@@ -11,28 +10,48 @@ const ProductsList = ({
     addProduct,
     toggleNewProductInput,
     changeProduct,
+    usedIcons,
+    choisedProducts,
+    toggleChoisedProduct,
 }) => {
-    const [newProduct, setNewProduct] = useState(null)
-
+    const productIsChoised = (productId) => {
+        return choisedProducts.some(
+            (choisedProductId) => choisedProductId === productId
+        )
+    }
+    console.log(productsData)
     const buildProductsList = (productsData) => {
         return productsData.map((productData) => (
-            <ProductItem
+            <div
                 key={productData.id}
-                productData={productData}
-                productIconsData={productIconsData}
-                changeProduct={changeProduct}
-            />
+                className={`product-item-wrapper ${
+                    productIsChoised(productData.id)
+                        ? 'product-item-wrapper_choised'
+                        : ''
+                }`}
+                onClick={() => toggleChoisedProduct(productData.id)}
+            >
+                <ProductItem
+                    productData={productData}
+                    productIconsData={productIconsData}
+                    changeProduct={changeProduct}
+                    toggleChoisedProduct={toggleChoisedProduct}
+                    usedIcons={usedIcons}
+                />
+            </div>
         ))
     }
 
     return (
         <div className="products-list">
-            <NewProductItem
-                isVisible={hasNewProductInput}
-                addProduct={addProduct}
-                changeProduct={changeProduct}
-                toggleNewProductInput={toggleNewProductInput}
-            />
+            <div className={`${hasNewProductInput ? '' : 'product-hide'}`}>
+                <NewProductItem
+                    hasNewProductInput={hasNewProductInput}
+                    addProduct={addProduct}
+                    changeProduct={changeProduct}
+                    toggleNewProductInput={toggleNewProductInput}
+                />
+            </div>
             {buildProductsList(productsData)}
         </div>
     )

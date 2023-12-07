@@ -4,7 +4,11 @@ import { useState, useEffect, useRef } from 'react'
 
 import checkLength from '../../utils/checkLength'
 
-const NewProductItem = ({ isVisible, addProduct, toggleNewProductInput }) => {
+const NewProductItem = ({
+    hasNewProductInput,
+    addProduct,
+    toggleNewProductInput,
+}) => {
     const productIconDefault = {
         url: './static/icons/Group.svg',
         id: 'Group',
@@ -17,10 +21,10 @@ const NewProductItem = ({ isVisible, addProduct, toggleNewProductInput }) => {
     const [productIcon, setProductIcon] = useState(productIconDefault)
 
     useEffect(() => {
-        if (isVisible) {
+        if (hasNewProductInput) {
             input1Ref.current.focus()
         }
-    }, [isVisible])
+    }, [hasNewProductInput])
 
     const handleKeyPress = (event) => {
         const value = event.target.value
@@ -43,12 +47,22 @@ const NewProductItem = ({ isVisible, addProduct, toggleNewProductInput }) => {
             saveNewProduct(productId, productName, productIcon)
         }
     }
-
-    const blurInput = () => {
+    const clearInputs = () => {
         setProductId('')
         setProductName('')
         setProductIcon(productIconDefault)
         toggleNewProductInput()
+    }
+    const blurInput = (event) => {
+        const targ = event.target
+        if (
+            !targ.classList.contains('product-item') &&
+            targ !== input1Ref.current &&
+            targ !== input2Ref.current
+        ) {
+            console.log('may be&')
+            clearInputs()
+        }
     }
 
     const saveNewProduct = (productId, productName, productIcon) => {
@@ -60,45 +74,44 @@ const NewProductItem = ({ isVisible, addProduct, toggleNewProductInput }) => {
             icon: productIcon,
         }
         addProduct(newProductData)
-        blurInput()
-    }
-    const buildNewProductRow = () => {
-        return (
-            <div className="product-item table-row">
-                <div className="product-item_status table-row_status">
-                    {'off'}
-                </div>
-                <div className="product-item_product table-row_product">
-                    {'XXXX-'}
-                </div>
-                <div className="product-item_id table-row_id">
-                    <input
-                        type="text"
-                        ref={input1Ref}
-                        placeholder="ID"
-                        onChange={(e) => setProductId(e.target.value)}
-                        maxLength={3}
-                        value={productId}
-                        onKeyDown={handleKeyPress}
-                    />
-                </div>
-                <div className="product-item_name table-row_name">
-                    <img src={`${productIcon.url}`} alt={`${productIcon.id}`} />
-                    <input
-                        type="text"
-                        ref={input2Ref}
-                        placeholder="Name"
-                        onChange={(e) => setProductName(e.target.value)}
-                        maxLength={50}
-                        value={productName}
-                        onKeyDown={handleKeyPress}
-                    />
-                </div>
-            </div>
-        )
+        clearInputs()
     }
 
-    return isVisible ? buildNewProductRow() : <></>
+    return (
+        <div className={`product-item table-row`}>
+            <div className="table-row-prev" />
+
+            <div className="product-item_status table-row_status">{'off'}</div>
+            <div className="product-item_product table-row_product">
+                {'XXXX-'}
+            </div>
+            <div className="product-item_id table-row_id">
+                <input
+                    type="text"
+                    ref={input1Ref}
+                    placeholder="ID"
+                    onChange={(e) => setProductId(e.target.value)}
+                    maxLength={3}
+                    onBlur={blurInput}
+                    value={productId}
+                    onKeyDown={handleKeyPress}
+                />
+            </div>
+            <div className="product-item_name table-row_name">
+                <img src={`${productIcon.url}`} alt={`${productIcon.id}`} />
+                <input
+                    type="text"
+                    ref={input2Ref}
+                    placeholder="Name"
+                    onChange={(e) => setProductName(e.target.value)}
+                    maxLength={50}
+                    onBlur={blurInput}
+                    value={productName}
+                    onKeyDown={handleKeyPress}
+                />
+            </div>
+        </div>
+    )
 }
 
 export default NewProductItem

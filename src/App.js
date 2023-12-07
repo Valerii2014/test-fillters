@@ -1,6 +1,6 @@
 import './styles/app.scss'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import FiltersMenu from './components/filtersMenu/FIltersMenu'
 import ProductsList from './components/productsList/ProductsList'
 
@@ -108,27 +108,136 @@ const productDataBase = [
             id: 'Group',
         },
     },
+    {
+        status: false,
+        product: 'XXXX-',
+        id: 5,
+        name: 'Space grey',
+        icon: {
+            url: './static/icons/Group.svg',
+            id: 'Group',
+        },
+    },
+    {
+        status: false,
+        product: 'XXXX-',
+        id: 6,
+        name: 'Space greysddsdsds',
+        icon: {
+            url: './static/icons/Group.svg',
+            id: 'Group',
+        },
+    },
+    {
+        status: false,
+        product: 'XXXX-',
+        id: 7,
+        name: 'Space gredsfsdfdsfy',
+        icon: {
+            url: './static/icons/Group.svg',
+            id: 'Group',
+        },
+    },
+    {
+        status: false,
+        product: 'XXXX-',
+        id: 8,
+        name: 'Red grey and more other',
+        icon: {
+            url: './static/icons/Group.svg',
+            id: 'Group',
+        },
+    },
+    {
+        status: false,
+        product: 'XXXX-',
+        id: 9,
+        name: 'Space grey',
+        icon: {
+            url: './static/icons/Group.svg',
+            id: 'Group',
+        },
+    },
 ]
 function App() {
+    const productIconsData = iconsDataBase
     const [productsData, setProductsData] = useState(productDataBase)
     const [hasNewProductInput, setHasNewProductInput] = useState(false)
-    const productIconsData = iconsDataBase
+    const [usedIcons, setUsedIcons] = useState([])
+    const [productDataWithFilters, setProductDataWithFilters] =
+        useState(productsData)
+    const [activeSearchFilters, setActiveSearchFilters] = useState('Все')
+    const [choisedProducts, setChoisedProducts] = useState([])
+    const filtersData = [
+        ...new Set(productsData.map((product) => product.name)),
+    ]
+    const updateUsedIcon = () => {
+        setUsedIcons([...new Set(productsData.map((prod) => prod.icon.id))])
+    }
+
+    useEffect(() => {
+        updateUsedIcon()
+    }, [productsData])
+
+    const addSearchFilter = (name) => {
+        if (name === 'Все') {
+            setActiveSearchFilters('Все')
+        } else if (Array.isArray(activeSearchFilters)) {
+            setActiveSearchFilters((activeSearchFilters) => [
+                ...activeSearchFilters,
+                name,
+            ])
+        } else {
+            setActiveSearchFilters([name])
+        }
+    }
+    console.log(activeSearchFilters)
+    const delSearchFilter = (name) => {
+        const newFilters = activeSearchFilters.filter(
+            (filterName) => filterName !== name
+        )
+        if (newFilters.length !== 0) {
+            setActiveSearchFilters(newFilters)
+        } else {
+            setActiveSearchFilters('Все')
+        }
+    }
 
     const addProduct = (oneProductData) => {
         setProductsData((productsData) => [oneProductData, ...productsData])
+        updateUsedIcon()
+    }
+
+    const dellChoisedProducts = () => {
+        setProductsData((prodData) =>
+            prodData.filter((prod) => !productIsChoised(prod.id))
+        )
+        setChoisedProducts([])
+        updateUsedIcon()
+    }
+
+    const productIsChoised = (productId) => {
+        return choisedProducts.some(
+            (choisedProductId) => choisedProductId === productId
+        )
+    }
+    const toggleChoisedProduct = (productId) => {
+        if (productIsChoised(productId)) {
+            setChoisedProducts((choisedProducts) =>
+                choisedProducts.filter(
+                    (choisedProductId) => choisedProductId !== productId
+                )
+            )
+        } else {
+            setChoisedProducts((choisedProducts) => [
+                ...choisedProducts,
+                productId,
+            ])
+        }
     }
 
     const toggleNewProductInput = () => {
         setHasNewProductInput((hasNewProductInput) => !hasNewProductInput)
-    }
-
-    const toggleStatus = (productId) => {
-        const updatedDB = productsData.map((product) => {
-            if (product.id === productId) {
-                return { ...product, status: !product.status }
-            } else return product
-        })
-        setProductsData(updatedDB)
     }
 
     const changeProduct = (productId, nameOrStatusOrIconData = null) => {
@@ -146,16 +255,42 @@ function App() {
         setProductsData(updatedDB)
     }
 
+    const createProductWithFilt = () => {
+        if (activeSearchFilters === 'Все') return productsData
+        if (Array.isArray(activeSearchFilters)) {
+            return productsData.filter((product) => {
+                if (
+                    activeSearchFilters.some(
+                        (activFilt) => activFilt === product.name
+                    )
+                ) {
+                    return product
+                }
+            })
+        }
+    }
+
     return (
         <div className="App">
-            <FiltersMenu toggleNewProductInput={toggleNewProductInput} />
+            <FiltersMenu
+                toggleNewProductInput={toggleNewProductInput}
+                activeSearchFilters={activeSearchFilters}
+                filtersData={filtersData}
+                addSearchFilter={addSearchFilter}
+                delSearchFilter={delSearchFilter}
+                choisedProducts={choisedProducts}
+                dellChoisedProducts={dellChoisedProducts}
+            />
             <ProductsList
-                productsData={productsData}
+                productsData={createProductWithFilt()}
                 productIconsData={productIconsData}
                 hasNewProductInput={hasNewProductInput}
                 addProduct={addProduct}
                 changeProduct={changeProduct}
                 toggleNewProductInput={toggleNewProductInput}
+                toggleChoisedProduct={toggleChoisedProduct}
+                choisedProducts={choisedProducts}
+                usedIcons={usedIcons}
             />
         </div>
     )

@@ -1,5 +1,6 @@
 .menuItem {
     display: flex;
+    position: relative;
     flex-direction: column;
     &_name {
         height: 50%;
@@ -24,10 +25,47 @@
         width: 100%;
         border: none;
         border-bottom: solid 2px #000;
+        z-index: 4;
         &:focus {
             outline: none;
             border: none;
             border-bottom: solid 2px rgb(94, 94, 226);
         }
+    }
+    .filters-list-wrapper {
+        display: none;
+        width: 100%;
+        height: 103px;
+        position: absolute;
+        bottom: 0px;
+        transform: translateY(100%);
+        overflow: hidden;
+        z-index: 5;
+        &_for-handler {
+            overflow: auto;
+            height: 100%;
+        }
+    }
+    .filters-list-wrapper_active {
+        display: block;
+
+        input,
+        .filters-list-wrapper_active {
+            z-index: 10;
+        }
+        .filters-list {
+            position: relative;
+            z-index: 10;
+            animation: show 1s forwards;
+        }
+    }
+}
+
+@keyframes show {
+    0% {
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateY(0%);
     }
 }
