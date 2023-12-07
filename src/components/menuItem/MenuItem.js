@@ -8,9 +8,10 @@ const MenuItem = ({ name, placeHolder, filterFunctions }) => {
         delSearchFilter,
         filtersData,
         activeSearchFilters,
+        menuIsActive,
     } = filterFunctions
 
-    const [ownPlaceHolder, setOwnPlaceHolder] = useState('')
+    const [ownPlaceHolder, setOwnPlaceHolder] = useState(filtersData)
     const [ownFiltersData, setOwnFiltersData] = useState(filtersData)
     const [ownActiveSearchFilters, setOwnActiveSearchFilters] =
         useState(activeSearchFilters)
@@ -82,19 +83,23 @@ const MenuItem = ({ name, placeHolder, filterFunctions }) => {
                     onMouseEnter={handleMouseEnter}
                 />
                 <div className="menuItem_input_arrow">
-                    <svg
-                        width="9"
-                        height="5"
-                        viewBox="0 0 9 5"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <path
-                            d="M4.5 4.65385L0 0.5L9 0.5L4.5 4.65385Z"
-                            fill="black"
-                            fillOpacity="0.7"
-                        />
-                    </svg>
+                    {menuIsActive ? (
+                        <svg
+                            width="9"
+                            height="5"
+                            viewBox="0 0 9 5"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path
+                                d="M4.5 4.65385L0 0.5L9 0.5L4.5 4.65385Z"
+                                fill="black"
+                                fillOpacity="0.7"
+                            />
+                        </svg>
+                    ) : (
+                        <></>
+                    )}
                 </div>
             </div>
             <div
@@ -105,7 +110,10 @@ const MenuItem = ({ name, placeHolder, filterFunctions }) => {
                 }`}
             >
                 {filterFunctions ? (
-                    <div className="filters-list-wrapper_for-handler">
+                    <div
+                        className="filters-list-wrapper_for-handler"
+                        onMouseLeave={handleBlur}
+                    >
                         <FiltersList
                             clearInput={clearInput}
                             addSearchFilter={addSearchFilter}

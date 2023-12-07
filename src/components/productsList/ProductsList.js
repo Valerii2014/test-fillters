@@ -18,6 +18,7 @@ const ProductsList = ({
     toggleChoisedProduct,
     delFromChoised,
 }) => {
+    const [tableIsActive, setTableIsActive] = useState(false)
     const productIsChoised = (productId) => {
         return choisedProducts.some(
             (choisedProductId) => choisedProductId === productId
@@ -55,13 +56,18 @@ const ProductsList = ({
                     usedIcons={usedIcons}
                     dellProduct={dellProduct}
                     delFromChoised={delFromChoised}
+                    tableIsActive={tableIsActive}
                 />
             </div>
         ))
     }
 
     return (
-        <div className="products-list">
+        <div
+            className="products-list"
+            onMouseEnter={() => setTableIsActive(true)}
+            onMouseLeave={() => setTableIsActive(false)}
+        >
             <div className={`${hasNewProductInput ? '' : 'product-hide'}`}>
                 <NewProductItem
                     hasNewProductInput={hasNewProductInput}

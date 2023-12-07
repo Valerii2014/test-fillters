@@ -72,14 +72,14 @@ const productDataBase = [
         status: false,
         product: 'XXXX-',
         id: 1,
-        name: 'Rose gold',
+        name: 'Синий',
         icon: {
             url: './static/icons/Amazon.svg',
             id: 'amazon',
         },
     },
     {
-        status: false,
+        status: true,
         product: 'XXXX-',
         id: 2,
         name: '39-й рзмер',
@@ -89,7 +89,7 @@ const productDataBase = [
         },
     },
     {
-        status: false,
+        status: true,
         product: 'XXXX-',
         id: 3,
         name: '39,5-й размер',
@@ -99,7 +99,7 @@ const productDataBase = [
         },
     },
     {
-        status: false,
+        status: true,
         product: 'XXXX-',
         id: 4,
         name: 'Space grey',
@@ -109,10 +109,10 @@ const productDataBase = [
         },
     },
     {
-        status: false,
+        status: true,
         product: 'XXXX-',
         id: 5,
-        name: 'Space grey',
+        name: '40-й рзмер',
         icon: {
             url: './static/icons/Group.svg',
             id: 'Group',
@@ -149,10 +149,40 @@ const productDataBase = [
         },
     },
     {
-        status: false,
+        status: true,
         product: 'XXXX-',
         id: 9,
         name: 'Space grey',
+        icon: {
+            url: './static/icons/Group.svg',
+            id: 'Group',
+        },
+    },
+    {
+        status: true,
+        product: 'XXXX-',
+        id: 10,
+        name: '8Gb',
+        icon: {
+            url: './static/icons/Group.svg',
+            id: 'Group',
+        },
+    },
+    {
+        status: false,
+        product: 'XXXX-',
+        id: 11,
+        name: '16Gb',
+        icon: {
+            url: './static/icons/Group.svg',
+            id: 'Group',
+        },
+    },
+    {
+        status: true,
+        product: 'XXXX-',
+        id: 12,
+        name: '32Gb',
         icon: {
             url: './static/icons/Group.svg',
             id: 'Group',

@@ -14,6 +14,7 @@ const ProductItem = ({
     usedIcons,
     dellProduct,
     delFromChoised,
+    tableIsActive,
 }) => {
     const { status, product, id, name, icon } = productData
     const [isHelpActive, setIsHelpActive] = useState(false)
@@ -53,6 +54,7 @@ const ProductItem = ({
         delFromChoised(id)
         changeProduct(id)
     }
+
     return (
         <div className={`${isHelpActive ? 'wrapper-opacity' : ''}`}>
             <div
@@ -115,15 +117,15 @@ const ProductItem = ({
                     className={`table-row_additional ${
                         status ? 'table-row_additional_hide' : ''
                     }`}
-                    onMouseEnter={() => setIsHelpActive(true)}
-                    onMouseLeave={() => setIsHelpActive(false)}
+                    onMouseEnter={status ? null : () => setIsHelpActive(true)}
+                    onMouseLeave={status ? null : () => setIsHelpActive(false)}
                     onClick={() => {
                         if (!status) {
                             dellProduct(id)
                         }
                     }}
                 >
-                    <div></div>
+                    <div className={`${tableIsActive ? '' : 'hide'}`}></div>
                     <p className="help">Удалить строку</p>
                 </div>
             </div>
