@@ -10,6 +10,7 @@ const FiltersList = ({
     filtersData,
     clearInput,
     activeSearchFilters,
+    setOwnPlaceHolder,
 }) => {
     useEffect(() => {}, [filtersData])
 
@@ -31,6 +32,7 @@ const FiltersList = ({
                 }
                 onClick={() => {
                     addSearchFilter('Все')
+                    setOwnPlaceHolder('')
                     clearInput()
                 }}
             >

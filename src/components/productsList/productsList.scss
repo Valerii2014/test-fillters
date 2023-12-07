@@ -5,6 +5,8 @@
     }
     .product-item-wrapper {
         border-radius: 4px;
+        transition: all 0.3s;
+        cursor: pointer;
         &:hover {
             background-color: #cacaca;
             input {
@@ -22,6 +24,9 @@
                 border-radius: 4px 0 0 4px;
             }
         }
+        &_opacity {
+            opacity: 0.5;
+        }
         &:focus {
             background-color: #fff;
             input {
@@ -35,8 +40,10 @@
             }
         }
         &_choised {
+            color: #fff;
             background-color: #898989;
             input {
+                color: #fff;
                 background-color: #898989;
                 &:focus {
                     background-color: #898989;

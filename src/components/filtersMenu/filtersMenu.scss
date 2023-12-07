@@ -6,6 +6,12 @@
         flex-direction: column;
         align-items: center;
         justify-content: space-around;
+
+        &_hide {
+            div {
+                display: none;
+            }
+        }
     }
     &_button-item {
         position: absolute;
@@ -31,13 +37,62 @@
         border-radius: 4px;
         cursor: pointer;
     }
-    .del-selected-products {
+    .del-selected-products,
+    .add-product {
         .filtersMenu_button-item {
             rotate: 45deg;
             transform: translateX(-40%) translateY(-50%);
         }
         &_hide {
             display: none;
+        }
+        &:hover {
+            div {
+                &::before,
+                &::after {
+                    background-color: #cd2525;
+                }
+            }
+        }
+        div {
+            position: absolute;
+            top: 48%;
+            left: 19%;
+
+            &::before,
+            &::after {
+                content: '';
+                position: absolute;
+                width: 8px;
+                height: 1px;
+                background: #000;
+            }
+            &::before {
+                transform: rotate(45deg);
+            }
+            &::after {
+                transform: rotate(-45deg);
+            }
+        }
+    }
+    .add-product {
+        div {
+            &::before {
+                transform: rotate(90deg);
+            }
+            &::after {
+                transform: rotate(0deg);
+            }
+        }
+        &:hover {
+            div {
+                &::before {
+                    background: green;
+                }
+                &::after {
+                    background: green;
+                }
+            }
         }
     }
 }

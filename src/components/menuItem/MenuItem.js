@@ -10,7 +10,7 @@ const MenuItem = ({ name, placeHolder, filterFunctions }) => {
         activeSearchFilters,
     } = filterFunctions
 
-    const [ownPlaceHolder, setOwnPlaceHolder] = useState(placeHolder)
+    const [ownPlaceHolder, setOwnPlaceHolder] = useState('')
     const [ownFiltersData, setOwnFiltersData] = useState(filtersData)
     const [ownActiveSearchFilters, setOwnActiveSearchFilters] =
         useState(activeSearchFilters)
@@ -40,6 +40,9 @@ const MenuItem = ({ name, placeHolder, filterFunctions }) => {
         if (target !== input1Ref.current && target !== input2Ref.current) {
             setIsActiveList(false)
             input1Ref.current.blur()
+            if (Array.isArray(ownActiveSearchFilters)) {
+                setOwnPlaceHolder(ownActiveSearchFilters.join(', '))
+            }
         }
     }
     const handleChange = (event) => {
@@ -108,6 +111,7 @@ const MenuItem = ({ name, placeHolder, filterFunctions }) => {
                             addSearchFilter={addSearchFilter}
                             delSearchFilter={delSearchFilter}
                             filtersData={ownFiltersData}
+                            setOwnPlaceHolder={setOwnPlaceHolder}
                             activeSearchFilters={ownActiveSearchFilters}
                         />
                     </div>

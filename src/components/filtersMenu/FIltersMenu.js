@@ -1,5 +1,7 @@
 import './filtersMenu.scss'
 
+import { useEffect } from 'react'
+
 import MenuItem from '../menuItem/MenuItem'
 
 const FiltersMenu = ({
@@ -17,7 +19,7 @@ const FiltersMenu = ({
             <div className="menuItem">
                 <div className="menuItem_name">Cтатус</div>
                 <div className="menuItem_input">
-                    <input type="text" placeholder="on/off" />
+                    <input type="text" placeholder="on/off" readOnly />
                     <div className="menuItem_input_arrow">
                         <svg
                             width="9"
@@ -38,7 +40,7 @@ const FiltersMenu = ({
             <div className="menuItem">
                 <div className="menuItem_name">Товар</div>
                 <div className="menuItem_input">
-                    <input type="text" placeholder="????" />
+                    <input type="text" placeholder="????" readOnly />
                     <div className="menuItem_input_arrow">
                         <svg
                             width="9"
@@ -59,7 +61,7 @@ const FiltersMenu = ({
             <div className="menuItem">
                 <div className="menuItem_name">ID</div>
                 <div className="menuItem_input">
-                    <input type="text" placeholder="id" />
+                    <input type="text" placeholder="id" readOnly />
                     <div className="menuItem_input_arrow">
                         <svg
                             width="9"
@@ -80,7 +82,7 @@ const FiltersMenu = ({
             <MenuItem
                 // className="table-row_name"
                 name={'Название'}
-                placeHolder={'Product name'}
+                placeHolder={''}
                 filterFunctions={{
                     addSearchFilter,
                     delSearchFilter,
@@ -90,8 +92,7 @@ const FiltersMenu = ({
             />
             <div className="table-row_additional filtersMenu_additional">
                 <div className="add-product" onClick={toggleNewProductInput}>
-                    <div className="filtersMenu_button-item"></div>
-                    <div className="filtersMenu_button-item"></div>
+                    <div />
                 </div>
                 <div
                     className={`del-selected-products ${
@@ -101,8 +102,7 @@ const FiltersMenu = ({
                     }`}
                     onClick={dellChoisedProducts}
                 >
-                    <div className="filtersMenu_button-item"></div>
-                    <div className="filtersMenu_button-item"></div>
+                    <div />
                 </div>
             </div>
         </div>

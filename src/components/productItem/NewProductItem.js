@@ -60,7 +60,6 @@ const NewProductItem = ({
             targ !== input1Ref.current &&
             targ !== input2Ref.current
         ) {
-            console.log('may be&')
             clearInputs()
         }
     }
@@ -81,7 +80,9 @@ const NewProductItem = ({
         <div className={`product-item table-row`}>
             <div className="table-row-prev" />
 
-            <div className="product-item_status table-row_status">{'off'}</div>
+            <div className="product-item_status table-row_status">
+                <p className={`p p_off`}>off</p>
+            </div>
             <div className="product-item_product table-row_product">
                 {'XXXX-'}
             </div>
@@ -109,6 +110,9 @@ const NewProductItem = ({
                     value={productName}
                     onKeyDown={handleKeyPress}
                 />
+            </div>
+            <div className="table-row_additional" onClick={clearInputs}>
+                <div></div>
             </div>
         </div>
     )

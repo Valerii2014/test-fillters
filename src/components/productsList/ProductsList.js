@@ -1,5 +1,7 @@
 import './productsList.scss'
 
+import { useState } from 'react'
+
 import ProductItem from '../productItem/ProductItem'
 import NewProductItem from '../productItem/NewProductItem'
 
@@ -11,15 +13,17 @@ const ProductsList = ({
     toggleNewProductInput,
     changeProduct,
     usedIcons,
+    dellProduct,
     choisedProducts,
     toggleChoisedProduct,
+    delFromChoised,
 }) => {
     const productIsChoised = (productId) => {
         return choisedProducts.some(
             (choisedProductId) => choisedProductId === productId
         )
     }
-    console.log(productsData)
+
     const buildProductsList = (productsData) => {
         return productsData.map((productData) => (
             <div
@@ -28,8 +32,20 @@ const ProductsList = ({
                     productIsChoised(productData.id)
                         ? 'product-item-wrapper_choised'
                         : ''
-                }`}
-                onClick={() => toggleChoisedProduct(productData.id)}
+                } `}
+                onClick={(e) => {
+                    if (productData.status) return
+
+                    const classList = e.target.classList
+                    if (
+                        classList.contains('product-item') ||
+                        classList.contains('product-item_id') ||
+                        classList.contains('product-item_status') ||
+                        classList.contains('product-item_product')
+                    ) {
+                        toggleChoisedProduct(productData.id)
+                    }
+                }}
             >
                 <ProductItem
                     productData={productData}
@@ -37,6 +53,8 @@ const ProductsList = ({
                     changeProduct={changeProduct}
                     toggleChoisedProduct={toggleChoisedProduct}
                     usedIcons={usedIcons}
+                    dellProduct={dellProduct}
+                    delFromChoised={delFromChoised}
                 />
             </div>
         ))

@@ -164,8 +164,6 @@ function App() {
     const [productsData, setProductsData] = useState(productDataBase)
     const [hasNewProductInput, setHasNewProductInput] = useState(false)
     const [usedIcons, setUsedIcons] = useState([])
-    const [productDataWithFilters, setProductDataWithFilters] =
-        useState(productsData)
     const [activeSearchFilters, setActiveSearchFilters] = useState('Все')
     const [choisedProducts, setChoisedProducts] = useState([])
     const filtersData = [
@@ -191,7 +189,7 @@ function App() {
             setActiveSearchFilters([name])
         }
     }
-    console.log(activeSearchFilters)
+
     const delSearchFilter = (name) => {
         const newFilters = activeSearchFilters.filter(
             (filterName) => filterName !== name
@@ -207,7 +205,11 @@ function App() {
         setProductsData((productsData) => [oneProductData, ...productsData])
         updateUsedIcon()
     }
-
+    const dellProduct = (prodId) => {
+        setProductsData((productData) =>
+            productData.filter(({ id }) => id !== prodId)
+        )
+    }
     const dellChoisedProducts = () => {
         setProductsData((prodData) =>
             prodData.filter((prod) => !productIsChoised(prod.id))
@@ -234,6 +236,9 @@ function App() {
                 productId,
             ])
         }
+    }
+    const delFromChoised = (id) => {
+        setChoisedProducts(choisedProducts.filter((prodId) => prodId !== id))
     }
 
     const toggleNewProductInput = () => {
@@ -286,11 +291,13 @@ function App() {
                 productIconsData={productIconsData}
                 hasNewProductInput={hasNewProductInput}
                 addProduct={addProduct}
+                dellProduct={dellProduct}
                 changeProduct={changeProduct}
                 toggleNewProductInput={toggleNewProductInput}
                 toggleChoisedProduct={toggleChoisedProduct}
                 choisedProducts={choisedProducts}
                 usedIcons={usedIcons}
+                delFromChoised={delFromChoised}
             />
         </div>
     )
