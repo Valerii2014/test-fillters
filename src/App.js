@@ -232,7 +232,18 @@ function App() {
     }
 
     const addProduct = (oneProductData) => {
-        setProductsData((productsData) => [oneProductData, ...productsData])
+        let idChecked
+        if (
+            productsData.some((product) => {
+                return '' + product.id === '' + oneProductData.id
+            })
+        ) {
+            idChecked = Math.floor(Math.random() * (999 - 100 + 1)) + 100
+        } else idChecked = oneProductData.id
+        setProductsData((productsData) => [
+            { ...oneProductData, id: idChecked },
+            ...productsData,
+        ])
         updateUsedIcon()
     }
     const dellProduct = (prodId) => {
